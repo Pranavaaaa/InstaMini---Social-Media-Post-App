@@ -12,7 +12,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4001;
 
-app.use(cors());
+// Allow requests only from the frontend dev server running on localhost:5173
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
